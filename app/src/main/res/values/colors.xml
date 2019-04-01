@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color><!-- listview viewpager 半月形颜色-->
+    <color name="colorPrimaryDark">#12b7f5</color>
+    <color name="colorAccent">#12b7f5</color>
+    <color name="orange">#c4e10a</color>
+    <!--视频-->
+    <color name="colorPrimaryTrue">#12b7f5</color><!-- titlebar 颜色-->
+    <color name="lightgray">#aaaaaa</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blank">#40000000</color>
+    <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="text_color_black">#AA434343</color>
+</resources>
