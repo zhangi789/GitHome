@@ -9,8 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.laoka.cn.base.BaseActivity;
+import com.laoka.cn.enter.head.NewSFragment;
 import com.laoka.cn.enter.pic.PicContract;
 import com.laoka.cn.enter.pic.PicFragment;
+import com.laoka.cn.enter.sett.SettFragment;
 import com.laoka.cn.enter.video.VideoFragment;
 import com.laoka.cn.view.BottomNavigationViewHelper;
 
@@ -47,8 +49,8 @@ public class MainActivity extends BaseActivity {
         fragments.add(PicFragment.getInstance("图片"));
         fragments.add(VideoFragment.getInstance("在线视频", ""));
         // fragments.add(PicFragment.getInstance("图片"));
-        fragments.add(PicFragment.getInstance("头条"));
-        fragments.add(PicFragment.getInstance("设置"));
+        fragments.add(NewSFragment.getInstance("头条"));
+        fragments.add(SettFragment.getInstance("设置"));
     }
 
     @Override
@@ -57,7 +59,6 @@ public class MainActivity extends BaseActivity {
         selectFragment(0);
         mBottomNavigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
     }
-
     @Override
     protected void initData() {
         initNavigation();
@@ -104,12 +105,9 @@ public class MainActivity extends BaseActivity {
                     selectFragment(1);
                     break;
                 case R.id.tab_news:
-
                     selectFragment(2);
                     break;
-
                 case R.id.tab_my:
-
                     selectFragment(3);
                     break;
 

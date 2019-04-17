@@ -22,7 +22,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends BaseLazyFrag
     protected P mPresenter;
 
     protected abstract P createPresenter();
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

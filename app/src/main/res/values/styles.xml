@@ -1,22 +1,40 @@
 <resources>
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- 配置文件直接调用这里的主题 -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/BaseAppTheme"></style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- MD风格主题 theme  -->
-        <!--状态栏颜色 -->
+   <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        &lt;!&ndash; MD风格主题 theme  &ndash;&gt;
+        &lt;!&ndash;状态栏颜色 &ndash;&gt;
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!--标题栏颜色 -->
+        &lt;!&ndash;标题栏颜色 &ndash;&gt;
         <item name="colorPrimary">@color/colorPrimary</item>
-        <!--主题控件颜色  进度条、edittext指针颜色等 -->
+        &lt;!&ndash;主题控件颜色  进度条、edittext指针颜色等 &ndash;&gt;
         <item name="colorAccent">@color/colorAccent</item>
-        <!--主题文字颜色 -->
-        <!--<item name="android:textColorPrimary">@color/colorTheme</item>-->
+        &lt;!&ndash;主题文字颜色 &ndash;&gt;
+        &lt;!&ndash;<item name="android:textColorPrimary">@color/colorTheme</item>&ndash;&gt;
 
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <!--activity统一切换动画 右进右出-->
+        &lt;!&ndash;activity统一切换动画 右进右出&ndash;&gt;
         <item name="android:windowAnimationStyle">@style/activityAnimation1</item>
-    </style>
+    </style>-->
 
     <!-- activity界面切换动画 -->
     <style name="activityAnimation1" parent="@android:style/Animation">
@@ -51,6 +69,51 @@
         <item name="android:windowContentOverlay">@null</item>
         <!--activity统一切换动画 右进右出-->
         <item name="android:windowAnimationStyle">@style/activityAnimation1</item>
+    </style>
+
+
+
+    <style name="ToolBarTitleText" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="transparentText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">#00000000</item>
+
+    </style>
+    <style name="TabStyle" parent="TextAppearance.Design.Tab">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="TextAppearanceHome" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+
+
+    <style name="news_text_style">
+        <item name="android:textColor">#AEAEAE</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingExtra">0.0dip</item>
+    </style>
+
+    <style name="news_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="dialogSlideAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
     </style>
 
 </resources>

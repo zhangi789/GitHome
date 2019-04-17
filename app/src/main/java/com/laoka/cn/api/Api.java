@@ -21,5 +21,9 @@ public interface Api {
     String VIDEO_INFO_DOMAIN_NAME = "videoInfo";
     String APP_INFO_VIDEO_DOMAIN = "http://ib.365yg.com";
 
+    //新闻
+    String NEW_INFO_DOMAIN_NAME = "news";
+    String APP_INFO_NEWS_DOMAIN = "http://is.snssdk.com";
+
 
 }

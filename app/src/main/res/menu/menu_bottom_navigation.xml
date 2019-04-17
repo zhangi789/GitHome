@@ -23,7 +23,7 @@
         android:id="@+id/tab_my"
         android:enabled="true"
         android:icon="@drawable/menu_my"
-        android:title="头条"
+        android:title="设置"
         app:showAsAction="ifRoom" />
 
 </menu>

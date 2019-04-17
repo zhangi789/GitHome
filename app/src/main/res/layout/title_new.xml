@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#C34944"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="@dimen/x48">
+
+
+        <com.laoka.cn.view.CircleImageView
+            android:id="@+id/mTouIV"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/x70"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x16"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/tou_64_gf"
+            app:civ_border_color="@color/lightgray"
+            app:civ_border_width="1dp" />
+
+        <ImageView
+            android:id="@+id/mTouAdd"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x16"
+            android:src="@mipmap/tou_32_add" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_toLeftOf="@+id/mTouAdd"
+            android:layout_toRightOf="@+id/mTouIV"
+            android:background="@drawable/dr_tou_search">
+
+
+            <ImageView
+                android:id="@+id/mTouIVSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                android:src="@mipmap/tou_32_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_toRightOf="@+id/mTouIVSearch"
+                android:gravity="center"
+                android:text="搜你想搜的"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FFFFFF">
+
+        <com.laoka.cn.view.tab.ColorTrackTabLayout
+            android:id="@+id/mColorTab"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:tabIndicatorColor="#ff0000"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="100dp"
+            app:tabMode="scrollable"
+            app:text_selected_color="#ff0000"
+            app:text_size="16sp"
+            app:text_unselected_color="#000000"></com.laoka.cn.view.tab.ColorTrackTabLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/mTouManager"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#FFFFFF">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/tou_32_manager" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

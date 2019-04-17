@@ -11,4 +11,23 @@
     <color name="blank">#40000000</color>
     <color name="black">#000000</color> <!-- 黑色 -->
     <color name="text_color_black">#AA434343</color>
+    <color name="wei_color">#EBEBEB</color>
+    <color name="red">#FF0000</color>
+    <color name="color_f85959">#f85959</color>
+    <color name="color_4592C6">#4592C6</color>
+    <color name="color_D5E8F6">#D5E8F6</color>
+
+
+    <color name="news_tag_border_red">#F96B6B</color>
+    <color name="news_tag_border_blue">#3091D8</color>
+    <color name="selector_grey">#DDDDDD</color>
+    <color name="common_text_color">#FF222222</color>
+    <color name="new_common_text_color">#FF222222</color>
+
+
+    <color name="transparent">#00000000</color>
+    <color name="color_d43d3d">#d43d3d</color>
+
+    <color name="color_222222">#222222</color>
+    <color name="color_e8e8e8">#e8e8e8</color>
 </resources>

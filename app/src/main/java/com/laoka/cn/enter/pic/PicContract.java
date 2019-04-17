@@ -17,12 +17,10 @@ import io.reactivex.Observable;
  * @describe
  */
 public interface PicContract {
-
     interface View extends IView {
         //更新图表
         void updataChart(boolean mIsFrist, String msg);
     }
-
     interface Model extends IModel {
         // 获得首页数据
         Observable<String> getLogin(Map<String, Object> mapsLogin, LifecycleProvider<FragmentEvent> lifecycleProvider);

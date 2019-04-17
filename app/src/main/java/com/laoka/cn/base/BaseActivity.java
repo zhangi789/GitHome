@@ -1,14 +1,17 @@
 package com.laoka.cn.base;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
+import com.laoka.cn.R;
 import com.laoka.cn.util.StatusUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.yanzhenjie.sofia.Sofia;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,6 +45,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // StatusUtil.setNomalScreen(this);
+        Sofia.with(this).statusBarDarkFont();
         int layoutResId = getLayoutId();
         if (layoutResId != 0) {
 
@@ -56,6 +60,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             initView();
             initData();
             initListener();
+
         }
     }
 

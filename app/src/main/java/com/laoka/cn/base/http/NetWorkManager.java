@@ -17,6 +17,7 @@ package com.laoka.cn.base.http;
 
 import com.laoka.cn.api.Api;
 import com.laoka.cn.api.BaseService;
+import com.laoka.cn.api.NewService;
 import com.laoka.cn.api.VideoInfoService;
 import com.laoka.cn.api.VideoService;
 
@@ -44,6 +45,9 @@ public class NetWorkManager {
     private VideoService mVideoApiService;
     private VideoInfoService mVideoInfoAipService;
 
+
+    private NewService mNewApiService;
+
     private static class NetWorkManagerHolder {
         private static final NetWorkManager INSTANCE = new NetWorkManager();
     }
@@ -69,6 +73,7 @@ public class NetWorkManager {
         this.mBaseApiService = mRetrofit.create(BaseService.class);
         this.mVideoApiService = mRetrofit.create(VideoService.class);
         this.mVideoInfoAipService = mRetrofit.create(VideoInfoService.class);
+        this.mNewApiService = mRetrofit.create(NewService.class);
     }
 
     public OkHttpClient getOkHttpClient() {
@@ -89,5 +94,9 @@ public class NetWorkManager {
 
     public VideoInfoService getmVideoInfoAipService() {
         return mVideoInfoAipService;
+    }
+
+    public NewService getmNewApiService() {
+        return mNewApiService;
     }
 }

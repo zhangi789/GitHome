@@ -101,5 +101,26 @@ public class StatusUtil {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
+    /**
+     * 修改状态栏颜色，支持4.4以上版本
+     * @param colorId 颜色
+     */
+    public static void setStatusBarColor(Activity activity, int colorId) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.setStatusBarColor(colorId);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //使用SystemBarTintManager,需要先将状态栏设置为透明
+        /*    setTranslucentStatus(activity);
+            SystemBarTintManager systemBarTintManager = new SystemBarTintManager(activity);
+            systemBarTintManager.setStatusBarTintEnabled(true);//显示状态栏
+            systemBarTintManager.setStatusBarTintColor(colorId);//设置状态栏颜色*/
+        }
+    }
+
+
+
+
 
 }
