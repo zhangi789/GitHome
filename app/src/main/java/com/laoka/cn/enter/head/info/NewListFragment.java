@@ -189,6 +189,9 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
             @Override
             public void onChildViewAttachedToWindow(View view) {
 
+
+
+                
             }
 
             @Override
