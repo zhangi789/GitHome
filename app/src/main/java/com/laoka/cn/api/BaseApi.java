@@ -2,6 +2,8 @@ package com.laoka.cn.api;
 
 import android.support.multidex.MultiDexApplication;
 
+import org.litepal.LitePalApplication;
+
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 /**
@@ -23,6 +25,7 @@ public class BaseApi extends MultiDexApplication {
 
 //      RetrofitUrlManager.getInstance().putDomain(GITHUB_DOMAIN_NAME, APP_GITHUB_DOMAIN);
 
-
+        //初始化数据库/
+        LitePalApplication.initialize(getApplicationContext());//初始化litePal
     }
 }

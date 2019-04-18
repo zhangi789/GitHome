@@ -25,6 +25,7 @@ import com.laoka.cn.util.OnChannelListener;
 import com.laoka.cn.util.SPUtil;
 import com.laoka.cn.view.CircleImageView;
 import com.laoka.cn.view.tab.ColorTrackTabLayout;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,6 +157,7 @@ public class NewSFragment extends BaseMvpFragment<NewsPresenter> implements News
             @Override
             public void onPageSelected(int position) {
                 //当页签切换的时候，如果有播放视频，则释放资源
+                GSYVideoManager.releaseAllVideos();
             }
 
             @Override

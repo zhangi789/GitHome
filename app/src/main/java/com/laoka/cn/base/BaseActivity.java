@@ -45,13 +45,11 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // StatusUtil.setNomalScreen(this);
-        Sofia.with(this).statusBarDarkFont();
         int layoutResId = getLayoutId();
         if (layoutResId != 0) {
 
             Intent intent = getIntent();
-            if (intent != null)
-                getIntent(intent);
+            if (intent != null) getIntent(intent);
             setContentView(layoutResId);
             mUnbinder = ButterKnife.bind(this);
             if (useEventBus()) {

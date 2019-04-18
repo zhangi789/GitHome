@@ -15,6 +15,7 @@ import com.laoka.cn.enter.pic.PicFragment;
 import com.laoka.cn.enter.sett.SettFragment;
 import com.laoka.cn.enter.video.VideoFragment;
 import com.laoka.cn.view.BottomNavigationViewHelper;
+import com.yanzhenjie.sofia.Sofia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initFragment() {
+        Sofia.with(this).statusBarDarkFont().statusBarBackground(getResources().getColor(R.color.colorPrimaryDark));
         fragments = new ArrayList<>();
         fragments.add(PicFragment.getInstance("图片"));
         fragments.add(VideoFragment.getInstance("在线视频", ""));
@@ -57,6 +59,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         initFragment();
         selectFragment(0);
+
         mBottomNavigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
     }
     @Override
@@ -98,16 +101,23 @@ public class MainActivity extends BaseActivity {
         mBottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.tab_pic:
+
+                    Sofia.with(this).statusBarDarkFont().statusBarBackground(getResources().getColor(R.color.colorPrimaryDark));
                     selectFragment(0);
                     break;
                 case R.id.tab_video:
 
+
+                    Sofia.with(this).statusBarDarkFont().statusBarBackground(getResources().getColor(R.color.colorPrimaryDark));
                     selectFragment(1);
                     break;
                 case R.id.tab_news:
+
+                    Sofia.with(this).statusBarDarkFont().statusBarBackground(getResources().getColor(R.color.red_3));
                     selectFragment(2);
                     break;
                 case R.id.tab_my:
+                    Sofia.with(this).statusBarDarkFont().statusBarBackground(getResources().getColor(R.color.white));
                     selectFragment(3);
                     break;
 

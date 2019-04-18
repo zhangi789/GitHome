@@ -5,6 +5,6 @@
     <version value="1" ></version>
 
     <list>
-        <mapping class="com.zh.xplan.ui.menutoutiao.model.NewsRecord"></mapping>
+        <mapping class="com.laoka.cn.db.NewsRecord"></mapping>
     </list>
 </litepal>

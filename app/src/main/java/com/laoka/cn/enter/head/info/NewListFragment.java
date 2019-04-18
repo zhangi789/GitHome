@@ -22,9 +22,13 @@ import com.laoka.cn.base.BaseMvpFragment;
 import com.laoka.cn.bean.News;
 import com.laoka.cn.bean.NewsData;
 import com.laoka.cn.bean.NewsResponse;
+import com.laoka.cn.db.NewsRecord;
+import com.laoka.cn.db.NewsRecordHelper;
 import com.laoka.cn.util.BaseUtil;
 import com.laoka.cn.util.Constant;
+import com.laoka.cn.util.SPUtil;
 import com.laoka.cn.view.TipView;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.NetworkUtils;
 import com.xfresh.cn.RxRefreshLayout;
 import com.xfresh.cn.footer.LoadingView;
@@ -57,23 +61,37 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
     RxRefreshLayout mRx;
     Unbinder unbinder;
 
-    private String category = "";
+    private String mChannelCode = "";
     private boolean isRecommendChannel;//是否是推荐频道
     long lastTime;
     private boolean isVideoList;//是否是视频列表页面,根据判断频道号是否是视频
-
+    private Gson mGson = new Gson();
     private NewsAdapter mNewAdapter;
-
+    //新闻记录
+    private NewsRecord mNewsRecord;
     private boolean isFrist = false;
+    private List<News> mNewsList = new ArrayList<>();
 
+    private boolean mAddSort=false;
     @Override
     protected NewListPresenter createPresenter() {
         return new NewListPresenter();
     }
     @Override
     protected void lazyLoad() {
-        setLoadData();
-        Log.i("NNN", "lazyLoad--  当前页面---");
+        mNewsRecord = NewsRecordHelper.getLastNewsRecord(mChannelCode);
+        if (mNewsRecord == null) {
+            //找不到记录，拉取网络数据
+            mNewsRecord = new NewsRecord();//创建一个没有数据的对象
+            setLoadData();
+            return;
+        }
+        //找到最后一组记录，转换成新闻集合并展示
+        List<News> newsList = NewsRecordHelper.convertToNewsList(mNewsRecord.getJson());
+        mNewsList.addAll(newsList);//添加到集合中
+        mNewAdapter.notifyDataSetChanged();//刷新adapter
+
+
     }
 
     private void setLoadData() {
@@ -82,12 +100,22 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
             RetrofitUrlManager.getInstance().putDomain(Api.NEW_INFO_DOMAIN_NAME, Api.APP_INFO_NEWS_DOMAIN);
         }
         Map<String, Object> map = new HashMap<>();
-        map.put("category", category);
-        map.put("min_behot_time", "1555032749");
-        map.put("last_refresh_sub_entrance_interval", "1555032749 ");
+
+
+        lastTime = SPUtil.getLong(getActivity(),mChannelCode,0);//读取对应频道下最后一次刷新的时间戳
+        if (lastTime == 0){
+            //如果为空，则是从来没有刷新过，使用当前时间戳
+            lastTime = System.currentTimeMillis() / 1000;
+        }
+
+
+
+        map.put("category", mChannelCode);
+        map.put("min_behot_time", lastTime);
+        map.put("last_refresh_sub_entrance_interval", System.currentTimeMillis()/1000);
         mPresenter.getNewListData(true, map, this);
         String[] channelCodes = getResources().getStringArray(R.array.channel_code);
-        isRecommendChannel = category.equals(channelCodes[0]);//是否是推荐频道
+        isRecommendChannel = mChannelCode.equals(channelCodes[0]);//是否是推荐频道
         if (!NetworkUtils.isAvailable(getActivity())) {
             //网络不可用弹出提示
             mTipView.show();
@@ -120,11 +148,13 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mTipView.show("更新10条数据");
                         Log.i("zh", "------------------------");
+
+                        setLoadData();
+                        mAddSort=true;
                         refreshLayout.finishRefreshing();
                     }
-                }, 2000);
+                }, 1000);
             }
 
             @Override
@@ -132,16 +162,46 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        setLoadData();
+                        mAddSort=false;
                         refreshLayout.finishLoadmore();
                     }
-                }, 2000);
+                }, 200);
             }
         });
+
+
     }
 
     @Override
     protected void initListener() {
+        mNewAdapter = new NewsAdapter(getActivity(), mChannelCode, isVideoList, mNewsList);
+        mRv.setAdapter(mNewAdapter);
+        mNewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(mContext, "待处理", Toast.LENGTH_LONG).show();
+            }
+        });
 
+
+        mRv.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(View view) {
+
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(View view) {
+             /*   JzvdStd jzvd = (JzvdStd) view.findViewById(R.id.video_player);
+                if (jzvd != null && jzvd.jzDataSource != null && jzvd.jzDataSource.containsTheUrl(JZMediaManager.getCurrentUrl())) {
+                    Jzvd currentJzvd = JzvdMgr.getCurrentJzvd();
+                    if (currentJzvd != null && currentJzvd.currentScreen != Jzvd.SCREEN_WINDOW_FULLSCREEN) {
+                        Jzvd.releaseAllVideos();
+                    }
+                }*/
+            }
+        });
     }
 
     @Override
@@ -149,8 +209,8 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
         if (response == null) {
             return;
         }
-        isFrist = true;
         lastTime = System.currentTimeMillis() / 1000;
+        SPUtil.putLong(getActivity(),mChannelCode,lastTime);//保存刷新的时间戳
         NewsResponse newsResponse = new Gson().fromJson(response, NewsResponse.class);
         List<NewsData> data = newsResponse.data;
         List<News> newsList = new ArrayList<>();
@@ -170,17 +230,16 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
                 }
                 newsList.add(news);
 
-                mNewAdapter = new NewsAdapter(getActivity(), category, isVideoList, newsList);
-                mRv.setAdapter(mNewAdapter);
-                mNewAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                        Toast.makeText(mContext, "待处理", Toast.LENGTH_LONG).show();
-                    }
-                });
-
             }
+            mNewsList.addAll(newsList);
+            if (mAddSort){
+                mNewsList.addAll(0,newsList);
+            }else{
+                mNewsList.addAll(newsList);
+            }
+            mNewAdapter.notifyDataSetChanged();
+            NewsRecordHelper.save(mChannelCode, mGson.toJson(newsList));
+            mTipView.show("更新10条数据");
         }
     }
 
@@ -190,7 +249,7 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
         args.putBoolean(Constant.IS_VIDEO_LIST, isVideoList);
         NewListFragment fragment = new NewListFragment();
         fragment.setArguments(args);
-        fragment.category = channelCode;
+        fragment.mChannelCode = channelCode;
         fragment.isVideoList = isVideoList;
         return fragment;
     }

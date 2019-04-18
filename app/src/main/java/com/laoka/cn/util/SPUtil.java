@@ -30,6 +30,14 @@ public class SPUtil {
         }
         return mSp.getString(key, defValue);
     }
+    public static void putLong(Context context,String key, long value){
+        SharedPreferences sp = context.getSharedPreferences(SP_SPLASH, Context.MODE_PRIVATE);
+        sp.edit().putLong(key,value).commit();
+    }
 
+    public static long getLong(Context context,String key, long defValue){
+        SharedPreferences sp = context.getSharedPreferences(SP_SPLASH, Context.MODE_PRIVATE);
+        return sp.getLong(key,defValue);
+    }
 
 }
