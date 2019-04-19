@@ -7,6 +7,10 @@ package com.laoka.cn.api;
  * @describe
  */
 public interface Api {
+
+
+
+    
     /**
      * 基础BaseURL
      */

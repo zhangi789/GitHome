@@ -191,7 +191,7 @@ public class NewListFragment extends BaseMvpFragment<NewListPresenter> implement
 
 
 
-                
+
             }
 
             @Override
